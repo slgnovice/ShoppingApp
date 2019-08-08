@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.OrderMapper">
+
+	<insert id="saveOrder" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into ec_order(order_code,create_date,amount,user_id)  values(#{orderCode},#{createDate},#{amount},#{userId})		
+	</insert>
+	
+	<!-- 展示订单详情页面 -->
+	<select id="getOrderByUserId" resultMap="getMap">
+		select * from ec_order where user_id=#{id}
+	</select>
+	
+	<resultMap type="com.java.pojo.Order" id="getMap">
+		<result column="order_code" property="orderCode"/>
+		<result column="create_date" property="createDate"/>
+		<result column="send_date" property="sendDate"/>
+		
+		<!-- 	根据订单 id 进行关联查询， 获取对应的订单详情信息 -->
+		<collection property="items" column="id" select="com.java.mapper.OrderItemMapper.getOrderItemByOrderId"></collection>
+	</resultMap>
+
+</mapper>

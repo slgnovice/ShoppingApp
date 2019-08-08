@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.OrderItemMapper">
+	<select id="getOrderItemByOrderId" resultMap="getMap">
+		select * from ec_order_item where order_id=#{orderId}
+	</select>
+	
+	<resultMap type="com.java.pojo.OrderItem" id="getMap">
+		<result column="order_num" property="orderNum"/>
+		<association property="article" column="article_id" select="com.java.mapper.ArticleMapper.findIdArticle"></association>
+	</resultMap>
+
+</mapper>

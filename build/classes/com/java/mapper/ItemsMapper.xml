@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java.mapper.ItemsMapper" >
+  	<select id="findAlls" resultType="com.java.pojo.Items">
+  		select * from items
+  	</select>
+  	<select id="findOneItem" parameterType="int" resultType="com.java.pojo.Items">
+  		select * from items where id=#{id}
+  	</select>
+  	<update id="updateOne" parameterType="com.java.pojo.Items">
+  		update items set name=#{name} where id=#{id}
+  	</update>
+</mapper>
